@@ -3,11 +3,23 @@ const app = express();
 const process = require("process");
 const apiRoutes = require('./routes/api.routes');
 const mongoose = require("mongoose");
+const cors = require('cors');
 const port = 3000;
 var MONGODB_URL = 'mongodb+srv://DevApi234:Test1234@atlascluster.7sodj.mongodb.net/?retryWrites=true&w=majority&appName=AtlasCluster';
 console.log(port)
 app.use(express.json());
 app.use(express.urlencoded({ extended: false }));
+app.use(cors({
+  origin: (origin, callback) => {
+    if (!origin) return callback(null, true);
+    if (allowedOrigins.includes(origin)) {
+      callback(null, true);
+    } else {
+      callback(new Error('Not allowed by CORS'));
+    }
+  },
+  credentials: true
+}));
 
 mongoose
   .connect(MONGODB_URL, { useNewUrlParser: true, useUnifiedTopology: true })
