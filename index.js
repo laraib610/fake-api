@@ -9,6 +9,7 @@ var MONGODB_URL = 'mongodb+srv://DevApi234:Test1234@atlascluster.7sodj.mongodb.n
 console.log(port)
 app.use(express.json());
 app.use(express.urlencoded({ extended: false }));
+const allowedOrigins = ['http://localhost:3000','http://localhost:4200', 'https://restaurant-apis.vercel.app'];
 app.use(cors({
   origin: (origin, callback) => {
     if (!origin) return callback(null, true);
